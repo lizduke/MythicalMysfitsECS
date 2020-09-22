@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "api-deployment"
+  namespace: "mythical-api"
+spec:
+  selector:
+    matchLabels:
+      app: "mythical-api"
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: "mythical-api"
+    spec:
+      containers:
+      - image: 529555812612.dkr.ecr.eu-west-1.amazonaws.com/mythicaleks:1.0
+        imagePullPolicy: Always
+        name: "mythical-api"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DDB_TABLE_NAME
+          value: Table-MythicalEKS
