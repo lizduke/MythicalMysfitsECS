@@ -14,7 +14,7 @@ spec:
         app: "mythical-api"
     spec:
       containers:
-      - image: 529555812612.dkr.ecr.eu-west-1.amazonaws.com/mythicaleks:1.0
+      - image: 529555812612.dkr.ecr.eu-west-1.amazonaws.com/mythicaleks:1.1
         imagePullPolicy: Always
         name: "mythical-api"
         ports:

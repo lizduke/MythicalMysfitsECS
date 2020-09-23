@@ -1,18 +1,18 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: "2048-ingress"
-  namespace: "2048-game"
+  name: "mythical-api-ingress"
+  namespace: "mythical-api"
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
   labels:
-    app: 2048-ingress
+    app: mythical-api
 spec:
   rules:
     - http:
         paths:
           - path: /*
             backend:
-              serviceName: "service-2048"
+              serviceName: "service-mythicalapi"
               servicePort: 80
