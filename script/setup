@@ -1,0 +1,39 @@
+#! /bin/bash
+
+set -eu
+echo "Please enter your aws cli profile name"
+read PROFILE
+export PROFILE
+echo "Please enter the name of your Mythical Mysfits cloudformation stack."
+read STACK_NAME
+export STACK_NAME
+echo "Thank you, and now please enter the region that $STACK_NAME was created in."
+read REGION
+export REGION
+
+#echo "Removing unneeded docker images..."
+#docker images -q | xargs docker rmi || true
+
+#echo "Installing dependencies..."
+#sudo yum install -y jq
+
+echo "Fetching CloudFormation outputs..."
+script/fetch-outputs
+
+echo "Populating DynamoDB table..."
+script/load-ddb
+
+echo "Uploading static site to S3..."
+if [[ $# -eq 1 ]]; then
+  script/upload-site $1
+else
+  script/upload-site
+fi
+
+#echo "Installing ECR Cred Helper..."
+#sudo script/credhelper
+
+#echo "Attaching Instance Profile to Cloud9..."
+#script/associate-profile
+
+echo "Success!"

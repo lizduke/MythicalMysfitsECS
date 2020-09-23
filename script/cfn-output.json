@@ -1,0 +1,7 @@
+{
+  "LoadBalancerDNS": "alb-MythicalEKS-1239245198.eu-west-1.elb.amazonaws.com",
+  "DynamoTable": "Table-MythicalEKS",
+  "ProfileName": "MythicalEKS-MythicalProfile-MC500KTV1UMF",
+  "SiteBucket": "mythicaleks-mythicalbucket-n67pn49jk0z9",
+  "S3WebsiteURL": "http://mythicaleks-mythicalbucket-n67pn49jk0z9.s3-website-eu-west-1.amazonaws.com"
+}

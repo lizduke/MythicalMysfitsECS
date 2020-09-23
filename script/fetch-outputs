@@ -1,0 +1,19 @@
+#! /bin/bash
+
+set -eu
+
+#if [[ $# -eq 1 ]]; then
+#  STACK_NAME=$1
+#else
+#  STACK_NAME="$(echo $C9_PROJECT | sed 's/^Project-//')"
+#fi
+#echo "Please enter your aws cli profile name"
+#read PROFILE
+#export PROFILE
+#echo "Please enter the name of your Mythical Mysfits cloudformation stack."
+#read STACK_NAME
+#export STACK_NAME
+#echo "Thank you, and now please enter the region that $STACK_NAME was created in."
+#read REGION
+#export REGION
+aws --profile $PROFILE --region $REGION cloudformation describe-stacks --stack-name "$STACK_NAME" | jq -r '[.Stacks[0].Outputs[] | {key: .OutputKey, value: .OutputValue}] | from_entries' > cfn-output.json
