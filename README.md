@@ -5,12 +5,13 @@ Add the name of the loadbalancer you will create (so a DNS name you can CNAME or
 Then run the setup script under scripts "script/setup" to populate the DynamoDB table and the S3 bucket.
 
 Create a repo using the cli.
+
 aws --region eu-west-1 ecr create-repository --repository-name mythicaleks --image-scanning-configuration scanOnPush=true
 
 
 Clone Olly's repo:
 
-git clone https://github.com/ollypom/mysfits 
+git clone https://github.com/ollypom/mysfits
 
 Build the Docker image from the pulled repo
 docker build -t mysfitsapi .
