@@ -13,7 +13,7 @@ if [[ -z $BUCKET_NAME ]]; then
   exit 1
 fi
 
-API_ENDPOINT=mythicaleks.test.psasbx.com 
+API_ENDPOINT=<Your loadbalancer DNS name>
 # For auth, not used now
 #USER_POOL_ID=$(jq < cfn-output.json -er '.UserPoolId')
 #CLIENT_ID=$(jq < cfn-output.json -er '.ClientId')
