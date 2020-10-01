@@ -7,6 +7,11 @@ Then run the setup script under scripts "script/setup" to populate the DynamoDB 
 Create a repo using the cli.
 aws --region eu-west-1 ecr create-repository --repository-name mythicaleks --image-scanning-configuration scanOnPush=true
 
+
+Clone Olly's repo:
+
+git clone https://github.com/ollypom/mysfits 
+
 Build the Docker image from the pulled repo
 docker build -t mysfitsapi .
 
@@ -15,6 +20,7 @@ Login to ECR repo.
 aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin <accountnumber>.dkr.ecr.eu-west-1.amazonaws.com
 
 Tag the image and push to ECR.
+
 docker tag mysfitsapi:latest <accountnumber>.dkr.ecr.eu-west-1.amazonaws.com/mythicaleks:1.0
 
 docker push <accountnumber>.dkr.ecr.eu-west-1.amazonaws.com/mythicaleks:1.0
@@ -22,6 +28,7 @@ docker push <accountnumber>.dkr.ecr.eu-west-1.amazonaws.com/mythicaleks:1.0
 Populate the MythicalCluster.yaml with your region, vpc-id and subnet ids that were creted by the core.yaml file.
 
 Build the cluster
+
 eksctl create cluster -f MythicalCluster.yaml
 
 ALB Ingress Controller :
@@ -39,19 +46,23 @@ eksctl utils associate-iam-oidc-provider \
 ➜ --approve
 
 Download an IAM policy to use with ALB ingress controller
+
 curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.8/docs/examples/iam-policy.json
 
-Create an IAM policy using the downloaded file. (first delete policy)
+Create an IAM policy using the downloaded file.
+
 aws iam create-policy \
 --policy-name alb-ingress-controller \
 --policy-document file://iam-policy.json
 
 Need policy-arn from previous
 Create ALB ingress controller service account using
+
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.8/docs/examples/rbac-role.yaml
 
 
 Create the IAM role using IRSA for the ALB ingress controller.
+
 eksctl create iamserviceaccount \
 --region eu-west-1 \
 --name alb-ingress-controller \
@@ -62,6 +73,7 @@ eksctl create iamserviceaccount \
 --approve
 
 Populate your ALB ingress controller with your vpc-id.
+
 kubectl apply -f alb-ingress-controller.yaml
 
 Now create the Namespace for the api server.
