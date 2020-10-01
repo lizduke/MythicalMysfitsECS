@@ -19,10 +19,14 @@ docker tag mysfitsapi:latest <accountnumber>.dkr.ecr.eu-west-1.amazonaws.com/myt
 
 docker push <accountnumber>.dkr.ecr.eu-west-1.amazonaws.com/mythicaleks:1.0
 
+Populate the MythicalCluster.yaml with your region, vpc-id and subnet ids that were creted by the core.yaml file.
+
 Build the cluster
 eksctl create cluster -f MythicalCluster.yaml
 
 ALB Ingress Controller :
+
+
 
 Add tags to Subnets for EKS to enable Loadbalancer autodiscovery.
 Subnets must contain these tags: 'kubernetes.io/cluster/MythicalEKS': ['shared' or 'owned'] and 'kubernetes.io/role/elb': ['' or '1'].
@@ -56,6 +60,9 @@ eksctl create iamserviceaccount \
 --attach-policy-arn arn:aws:iam::<accountnumber>:policy/alb-ingress-controller \
 --override-existing-serviceaccounts \
 --approve
+
+Populate your ALB ingress controller with your vpc-id.
+kubectl apply -f alb-ingress-controller.yaml
 
 Now create the Namespace for the api server.
 

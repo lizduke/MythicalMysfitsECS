@@ -1,0 +1,6 @@
+{
+  "DynamoTable": "Table-MythicalEKS",
+  "ProfileName": "MythicalEKS-MythicalProfile-NW9GMG1XYKXB",
+  "SiteBucket": "mythicalmisfits.test.psasbx.com",
+  "S3WebsiteURL": "http://mythicalmisfits.test.psasbx.com.s3-website-eu-west-1.amazonaws.com"
+}
